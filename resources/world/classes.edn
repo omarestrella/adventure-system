@@ -5,41 +5,80 @@
 ; Speed - 1 AP per point in stat
 ; Luck - wink wink, nudge nudge
 
-{:classes [{:key   :warrior
-            :name  "Warrior"
-            :stats {:strength     10
-                    :dexterity    2
-                    :intelligence 1
-                    :constitution 6
-                    :speed        5
-                    :luck         2}}
-           {:key   :mage
-            :name  "Mage"
-            :stats {:strength     1
-                    :dexterity    2
-                    :intelligence 10
-                    :constitution 6
-                    :speed        5
-                    :luck         2}}
-           {:key   :rogue
-            :name  "Rogue"
-            :stats {:strength     2
-                    :dexterity    10
-                    :intelligence 1
-                    :constitution 6
-                    :speed        5
-                    :luck         2}}]
+{:classes         [{:key   :warrior
+                    :name  "Warrior"
+                    :stats {:strength     10
+                            :dexterity    2
+                            :intelligence 1
+                            :constitution 6
+                            :speed        5
+                            :luck         2}}
 
- :specializations [{:key :fighter
+                   {:key   :mage
+                    :name  "Mage"
+                    :stats {:strength     1
+                            :dexterity    2
+                            :intelligence 10
+                            :constitution 6
+                            :speed        5
+                            :luck         2}}
+
+                   {:key   :rogue
+                    :name  "Rogue"
+                    :stats {:strength     2
+                            :dexterity    10
+                            :intelligence 1
+                            :constitution 6
+                            :speed        5
+                            :luck         2}}]
+
+ :specializations [{:key       :fighter
                     :modifiers {:constitution 2
-                                :speed 1}}
-                   {:key :knight}
-                   {:key :paladin}
+                                :speed        2
+                                :dexterity    1}
+                    :skills    []}
 
-                   {:key :enchanter}
-                   {:key :battlemage}
-                   {:key :cleric}
+                   {:key       :knight
+                    :modifiers {:constitution 3
+                                :strength     1
+                                :speed        1}
+                    :skills    []}
 
-                   {:key :thief}
-                   {:key :ranger}
-                   {:key :assassin}]}
+                   {:key       :paladin
+                    :modifiers {:constitution 3
+                                :intelligence 2}
+                    :skills    []}
+
+                   {:key       :enchanter
+                    :modifiers {:intelligence 4
+                                :dexterity    1}
+                    :skills    []}
+
+                   {:key       :battlemage
+                    :modifiers {:intelligence 2
+                                :strength     2
+                                :constitution 1}
+                    :skills    []}
+
+                   {:key       :cleric
+                    :modifiers {:intelligence 2
+                                :constitution 2
+                                :strength     1}
+                    :skills    []}
+
+                   {:key       :thief
+                    :modifiers {:speed     2
+                                :dexterity 2
+                                :luck      1}
+                    :spells    []}
+
+                   {:key       :ranger
+                    :modifiers {:speed        2
+                                :dexterity    2
+                                :constitution 1}
+                    :spells    []}
+
+                   {:key       :assassin
+                    :modifiers {:speed     3
+                                :dexterity 2}
+                    :spells    []}]}
