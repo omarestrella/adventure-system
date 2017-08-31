@@ -1,4 +1,4 @@
-(ns adventure-bot.db
+(ns adventure-system.db
   (:require [clojure.java.io :as io]
             [clojure.string :as string]
             [korma.db :refer :all]

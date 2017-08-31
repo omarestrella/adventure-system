@@ -1,6 +1,6 @@
-(ns adventure-bot.core
+(ns adventure-system.core
   (:gen-class)
-  (:require [adventure-bot.db :as db]))
+  (:require [adventure-system.db :as db]))
 
 (defn init []
   (db/init))
