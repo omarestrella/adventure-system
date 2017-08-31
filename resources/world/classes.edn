@@ -1,0 +1,45 @@
+; Str, Dex, Int - 5 offense per point in stat
+; Character bases start with 13 split between Str, Dex, Int
+;
+; Constitution - 6.5 health per point in stat
+; Speed - 1 AP per point in stat
+; Luck - wink wink, nudge nudge
+
+{:classes [{:key   :warrior
+            :name  "Warrior"
+            :stats {:strength     10
+                    :dexterity    2
+                    :intelligence 1
+                    :constitution 6
+                    :speed        5
+                    :luck         2}}
+           {:key   :mage
+            :name  "Mage"
+            :stats {:strength     1
+                    :dexterity    2
+                    :intelligence 10
+                    :constitution 6
+                    :speed        5
+                    :luck         2}}
+           {:key   :rogue
+            :name  "Rogue"
+            :stats {:strength     2
+                    :dexterity    10
+                    :intelligence 1
+                    :constitution 6
+                    :speed        5
+                    :luck         2}}]
+
+ :specializations [{:key :fighter
+                    :modifiers {:constitution 2
+                                :speed 1}}
+                   {:key :knight}
+                   {:key :paladin}
+
+                   {:key :enchanter}
+                   {:key :battlemage}
+                   {:key :cleric}
+
+                   {:key :thief}
+                   {:key :ranger}
+                   {:key :assassin}]}
