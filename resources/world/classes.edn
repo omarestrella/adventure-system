@@ -2,8 +2,14 @@
 ; Character bases start with 13 split between Str, Dex, Int
 ;
 ; Constitution - 6.5 health per point in stat
-; Speed - 1 AP per point in stat
+; Speed - 1 action-point (AP) per point in stat
 ; Luck - wink wink, nudge nudge
+;
+; Max level: None
+; Attribute points per even level: 1
+;   Soft cap at level 20, attribute points every 2 levels
+; Specialization point per 5 levels: 1
+;   Soft cap at level 20, specialization point every 10 levels
 
 {:classes         [{:key   :warrior
                     :name  "Warrior"
@@ -36,49 +42,58 @@
                     :modifiers {:constitution 2
                                 :speed        2
                                 :dexterity    1}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :warrior}
 
                    {:key       :knight
                     :modifiers {:constitution 3
                                 :strength     1
                                 :speed        1}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :warrior}
 
                    {:key       :paladin
                     :modifiers {:constitution 3
                                 :intelligence 2}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :warrior}
 
                    {:key       :enchanter
                     :modifiers {:intelligence 4
                                 :dexterity    1}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :mage}
 
                    {:key       :battlemage
                     :modifiers {:intelligence 2
                                 :strength     2
                                 :constitution 1}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :mage}
 
                    {:key       :cleric
                     :modifiers {:intelligence 2
                                 :constitution 2
                                 :strength     1}
-                    :skills    []}
+                    :skills    []
+                    :starting-class :mage}
 
                    {:key       :thief
                     :modifiers {:speed     2
                                 :dexterity 2
                                 :luck      1}
-                    :spells    []}
+                    :spells    []
+                    :starting-class :rogue}
 
                    {:key       :ranger
                     :modifiers {:speed        2
                                 :dexterity    2
                                 :constitution 1}
-                    :spells    []}
+                    :spells    []
+                    :starting-class :rogue}
 
                    {:key       :assassin
                     :modifiers {:speed     3
                                 :dexterity 2}
-                    :spells    []}]}
+                    :spells    []
+                    :starting-class :rogue}]}

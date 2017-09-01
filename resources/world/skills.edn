@@ -1,0 +1,43 @@
+[{:key       :heal
+  :base-name "Heal"
+  :levels    [{:key          :minor-heal
+               :name         "Minor Heal"
+               :description  "???"
+               :requirements {:levels          {:class          1
+                                                :specialization 1}
+                              :attributes      {:intelligence 3}
+                              :specializations [:paladin :cleric :enchanter :battlemage]
+                              :weapon-type     [:staff :charm]}}
+              {:key          :normal-heal
+               :name         "Heal"
+               :description  "???"
+               :requirements {:levels      {:class 6
+                                            :specializations 2}
+                              :attributes {:intelligence 6}
+                              :specializations [:paladin :cleric :enchanter]
+                              :weapon-type [:staff :charm]}}
+              {:key :massive-heal
+               :name "Super Mega Heal"
+               :description "???"
+               :requirements {:levels {:class 14
+                                       :specializations 4}
+                              :attributes {:intelligence 10}
+                              :specializations [:cleric]
+                              :weapon-type [:staff :charm]}}]}
+
+ {:key          :arrow-barrage
+  :name         "Arrow Barrage"
+  :description  "Fire multiple arrows in an arc. Hits all enemies."
+  :requirements {:level           ?
+                 :attributes      {:dexterity 8}
+                 :specializations [:ranger]
+                 :weapon-type     [:bow :cross-bow]}}
+ {:key          :ranged-power-stance
+  :name         "Ranged Power Stance"
+  :description  "Toggle stance, increasing damage and accuracy of ranged weapon."
+  :requirements {:level       ?
+                 :attributes  {:dexterity 4}
+                 :weapon-type [:bow :cross-bow]}}]
+
+
+
