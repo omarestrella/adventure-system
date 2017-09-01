@@ -1,12 +1,15 @@
 (ns adventure-system.core
   (:gen-class)
-  (:require [adventure-system.db :as db])
-  (:require [adventure-system.discord :as discord]))
+  (:require [adventure-system.db :as db]
+            [adventure-system.discord :as discord]
+            [clojure.string :as str]))
 
-(defn init []
-  (db/init))
+(def chat-interface
+  {"/d100" discord/d100
+   "/d20"  discord/d20
+   "/roll" discord/roll})
 
 (defn -main
   [& args]
-  (init)
-  (discord/connect))
+  (db/init)
+  (discord/connect chat-interface))
