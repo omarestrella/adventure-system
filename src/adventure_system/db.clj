@@ -22,6 +22,3 @@
   (default-connection connection)
   (select user
     (fields :id :username)))
-
-
-
