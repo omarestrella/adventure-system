@@ -4,13 +4,22 @@ FIXME: description
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Currently using clj-discord as a bare-bones clojure convenience library.
+It's not published so it must be added to lein manually:
+```
+$> cd ..
+$> git clone https://github.com/yotsov/clj-discord
+$> cd clj-discord
+$> lein install
+```
+
+A discord bot token needs to be in the file `token`
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar adventure-bot-0.1.0-standalone.jar [args]
+```
+$> lein run
+```
 
 ## Options
 
