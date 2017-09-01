@@ -5,18 +5,18 @@
 (def ^:private
   data (edn/read-string (slurp (io/resource "world/classes.edn"))))
 
-(defrecord Class
-  [base specializations])
+(def classes (:classes data))
+(def specializations (:specializations data))
 
 (defn get-class
   ([key]
-   (get-class key (:classes data)))
+   (get-class key classes))
   ([key classes]
    (first (filter #(= (:key %) key) classes))))
 
 (defn get-specialization
   ([key]
-   (get-specialization key (:specializations data)))
+   (get-specialization key specializations))
   ([key specs]
    (first (filter #(= (:key %) key) specs))))
 
