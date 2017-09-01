@@ -7,7 +7,8 @@
                  [korma "0.4.3"]
                  [org.xerial/sqlite-jdbc "3.20.0"]
                  [cheshire "5.8.0"]
-                 [clj-discord "0.1.0-SNAPSHOT"]]
+                 [clj-discord "0.1.0-SNAPSHOT"]
+                 [org.clojure/core.match "0.3.0-alpha5"]]
   :main adventure-system.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

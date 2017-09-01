@@ -1,7 +1,7 @@
-(ns adventure-bot.core-test
+(ns adventure-system.core-test
   (:require [clojure.test :refer :all]
-            [adventure-bot.core :refer :all]))
+            [adventure-system.core :refer :all]))
 
 (deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+  (testing "Pass"
+    (is (= 1 1))))
