@@ -4,17 +4,20 @@
 
 (defonce token (.trim (slurp "token")))
 
-(defn get-user [msg-data]
-  (get (get msg-data "author") "id"))
+(defn get-user-id [msg-data]
+  (get-in msg-data ["author" "id"]))
+
+(defn get-username [msg-data]
+  (get-in msg-data ["author" "username"]))
 
 (defn get-channel [msg-data]
   (get msg-data "channel_id"))
 
 (defn send-reply [msg-data reply]
   "send a reply to a user message in the same channel"
-  (let [user (get-user msg-data)
+  (let [user-id (get-user-id msg-data)
         channel (get-channel msg-data)]
-    (clj-discord/post-message-with-mention channel reply user)))
+    (clj-discord/post-message-with-mention channel reply user-id)))
 
 (defn process-message [command-map]
   "create processor function for messages that can delegate to the appropriate command function"

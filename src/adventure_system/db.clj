@@ -11,17 +11,16 @@
 
 (defdb connection spec)
 
-(declare user)
+(declare player)
 
-(defentity user
+(defentity player
   (pk :id)
-  (table :users)
-  (entity-fields :username))
+  (table :players)
+  (entity-fields :player_id :username))
 
 (defn init []
   (default-connection connection)
-  (select user
-    (fields :id :username)))
+  (select player))
 
 (defn has-character [user]
   "STUB: check if there's an entry in the character table for this user"
