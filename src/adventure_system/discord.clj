@@ -4,28 +4,28 @@
 
 (defonce token (.trim (slurp "token")))
 
-(defn d100 [args data]
-  (clj-discord/answer-command data "/d100" (str "Here you are a random number between 1 and 100: " (+ (rand-int 100) 1))))
+(defn get-user [msg-data]
+  (get (get msg-data "author") "id"))
 
-(defn d20 [args data]
-  (clj-discord/answer-command data "/d20" (str "roll (1-20): " (+ (rand-int 20) 1))))
+(defn get-channel [msg-data]
+  (get msg-data "channel_id"))
 
-(defn roll [args data]
-  (let [range (. Integer parseInt args)
-        roll-val (+ 1 (rand-int range))
-        message (str "roll (1-" range "): " roll-val)
-        channel (get data "channel_id")
-        user (get (get data "author") "id")]
-    (clj-discord/post-message-with-mention channel message user)))
+(defn send-reply [msg-data reply]
+  "send a reply to a user message in the same channel"
+  (let [user (get-user msg-data)
+        channel (get-channel msg-data)]
+    (clj-discord/post-message-with-mention channel reply user)))
 
 (defn process-message [command-map]
-  (fn [type data]
-    (when-let [content (get data "content")]
-      (let [[command rest] (str/split content #" " 2)]
+  "create processor function for messages that can delegate to the appropriate command function"
+  (fn [msg-type msg-data]
+    (when-let [content (get msg-data "content")]
+      (let [[command args] (str/split content #" " 2)]
         (when-let [executor (get command-map command)]
-          (executor rest data))))))
+          (executor args msg-data))))))
 
 (defn connect [command-map]
+  "connect to discord with a given set of commands configured"
   (let [receiver [(process-message command-map)]]
     (clj-discord/connect token
                          {"MESSAGE_CREATE" receiver

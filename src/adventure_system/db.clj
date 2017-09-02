@@ -22,3 +22,11 @@
   (default-connection connection)
   (select user
     (fields :id :username)))
+
+(defn has-character [user]
+  "STUB: check if there's an entry in the character table for this user"
+  nil)
+
+(defn create-character [type user]
+  "STUB: create a new character of specified type for user"
+  nil)
