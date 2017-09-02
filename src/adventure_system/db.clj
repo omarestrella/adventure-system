@@ -11,12 +11,45 @@
 
 (defdb connection spec)
 
-(declare player)
+(declare player attributes items weapons equipment)
 
-(defentity player
-  (pk :id)
+(defentity
+  items
+  (table :items)
+  (entity-fields :key))
+
+(defentity
+  weapons
+  (table :weapons)
+  (entity-fields :left :right))
+
+(defentity
+  equipment
+  (table :equipment)
+  (entity-fields :head :body :arms :legs))
+
+(defentity
+  attributes
+  (table :attributes)
+  (entity-fields :strength :dexterity :intelligence
+                 :constitution :speed :luck))
+
+(defentity
+  player
   (table :players)
-  (entity-fields :player_id :username))
+  (has-one attributes)
+  (has-one weapons)
+  (has-one equipment)
+  (has-many items)
+  (entity-fields :username :name :class :specializations :gold)
+
+  (transform (fn [{class :class
+                   specs :specializations
+                   :as   player}]
+               (-> player
+                   (assoc :class (keyword class))
+                   (assoc :specializations
+                          (map keyword (string/split specs #",")))))))
 
 (defn init []
   (default-connection connection)

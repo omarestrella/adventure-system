@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [adventure-system.db :as db]
             [adventure-system.discord :as discord]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.core.async :as async]))
 
 (def character-create-help
   "```
@@ -35,4 +36,6 @@ Specializations:
 (defn -main
   [& args]
   (db/init)
-  (discord/connect chat-interface))
+  ; New async thread so execution continues
+  (async/go
+    (discord/connect chat-interface)))
