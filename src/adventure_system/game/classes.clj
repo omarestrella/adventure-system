@@ -20,3 +20,14 @@
   ([key specs]
    (first (filter #(= (:key %) key) specs))))
 
+(defn base-attributes
+  [class-key spec-key]
+  (let [class (get-class class-key)
+        specialization (get-specialization spec-key)
+        stats (:stats class)
+        mods (:modifiers specialization)]
+    (reduce-kv (fn [m k v]
+                 (assoc m k (+ v (get mods k 0))))
+               {}
+               stats)))
+

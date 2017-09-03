@@ -2,7 +2,8 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as string]
             [korma.db :refer :all]
-            [korma.core :refer :all]))
+            [korma.core :refer :all]
+            [adventure-system.game.classes :as classes]))
 
 (def spec (sqlite3 {:db         (last (string/split
                                         (str (io/resource "sqlite.db"))
@@ -45,20 +46,34 @@
 
   (transform (fn [{class :class
                    specs :specializations
+                   left  :left
+                   right :right
                    :as   player}]
                (-> player
                    (assoc :class (keyword class))
                    (assoc :specializations
-                          (map keyword (string/split specs #",")))))))
+                          (map keyword (string/split specs #",")))
+                   (dissoc :left)
+                   (dissoc :right)
+                   (assoc :weapons {:left left :right right})))))
+
 
 (defn init []
   (default-connection connection)
   (select player))
 
-(defn has-character [user]
-  "STUB: check if there's an entry in the character table for this user"
-  nil)
+(defn has-character [username]
+  (first (select player
+           (where (= :username username)))))
 
-(defn create-character [type user]
+(defn- extract-user-data [[class spec & name-parts]]
+  {:class (keyword class)
+   :specialization (keyword spec)
+   :name (string/replace (string/join " " name-parts) "\"" "")})
+
+(defn create-character [args username]
   "STUB: create a new character of specified type for user"
-  nil)
+  (let [data (extract-user-data (string/split args #" "))
+        attributes (classes/base-attributes (:class data) (:specialization data))]
+    (+ 1 1)
+    nil))

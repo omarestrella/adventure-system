@@ -28,7 +28,7 @@ Specializations:
    "/register" (fn [args msg]
                  (let [username (discord/get-username msg)]
                    (if (db/has-character username)
-                     (discord/send-reply msg "You already have a character")
+                     (discord/send-reply msg " You already have a character")
                      (if-let [character (db/create-character args username)]
                        (discord/send-reply msg " Character created")
                        (discord/send-reply msg character-create-help)))))})
