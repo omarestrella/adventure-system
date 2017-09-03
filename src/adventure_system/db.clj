@@ -42,7 +42,7 @@
   (has-one weapons)
   (has-one equipment)
   (has-many items)
-  (entity-fields :username :name :class :specializations :gold)
+  (entity-fields :id :username :name :class :specializations :gold)
 
   (transform (fn [{class :class
                    specs :specializations
@@ -52,17 +52,20 @@
                (-> player
                    (assoc :class (keyword class))
                    (assoc :specializations
-                          (map keyword (string/split specs #",")))
+                          (map keyword (string/split (or specs "") #",")))
                    (dissoc :left)
                    (dissoc :right)
                    (assoc :weapons {:left left :right right})))))
 
 
 (defn init []
-  (default-connection connection)
-  (select player))
+  (default-connection connection))
 
-(defn has-character [username]
+(defn get-player [username]
+  (first (select player
+           (where (= :username username)))))
+
+(defn has-player [username]
   (first (select player
            (where (= :username username)))))
 
@@ -71,9 +74,22 @@
    :specialization (keyword spec)
    :name (string/replace (string/join " " name-parts) "\"" "")})
 
-(defn create-character [args username]
-  "STUB: create a new character of specified type for user"
+(defn- save-player-data [username data]
+  (let [results (insert player
+                  (values {:username username
+                           :name (:name data)
+                           :class (name (:class data))
+                           :specializations (name (:specialization data))
+                           :gold 0}))]
+    ((keyword "last_insert_rowid()") results)))
+
+(defn create-player [args username]
+  "Create character and return their id"
   (let [data (extract-user-data (string/split args #" "))
-        attributes (classes/base-attributes (:class data) (:specialization data))]
-    (+ 1 1)
-    nil))
+        attrs (classes/base-attributes (:class data) (:specialization data))
+        id (save-player-data username data)]
+    (insert attributes (values (assoc attrs :players_id id)))
+    (insert weapons (values {:players_id id}))
+    (insert equipment (values {:players_id id}))
+    id))
+
