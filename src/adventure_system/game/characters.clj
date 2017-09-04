@@ -23,9 +23,12 @@ Specializations:
 
 (defn welcome-message
   [player]
-  (format "Welcome to the world of [Insert World Name], %s.
+  (format " Welcome to the world of [Insert World Name], %s.
   You find yourself waking up in the local pub after a long night of drinking
-  with your good friend Walter."
+  with your good friend Walter. You stumble out of the pub, the morning light
+  blinding your hungover eyes. You look around and take stock of the rat-hole town
+  Walter dragged you to with promises of splendor and infamy. Now he is nowhere to
+  be found. Do you want to ask around for him?"
     (:name player)))
 
 (defn create-character [args msg]
